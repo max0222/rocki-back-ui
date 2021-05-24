@@ -1,40 +1,131 @@
 <template>
-<!--  <div class="dashboard-editor-container">-->
+  <!--  <div class="dashboard-editor-container">-->
+  <!--    <panel-group @handleSetLineChartData="handleSetLineChartData"/>-->
 
-<!--    <panel-group @handleSetLineChartData="handleSetLineChartData" />-->
+  <!--    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">-->
+  <!--      <line-chart :chart-data="lineChartData"/>-->
+  <!--    </el-row>-->
 
-<!--    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">-->
-<!--      <line-chart :chart-data="lineChartData" />-->
-<!--    </el-row>-->
-
-<!--    <el-row :gutter="32">-->
-<!--      <el-col :xs="24" :sm="24" :lg="8">-->
-<!--        <div class="chart-wrapper">-->
-<!--          <raddar-chart />-->
-<!--        </div>-->
-<!--      </el-col>-->
-<!--      <el-col :xs="24" :sm="24" :lg="8">-->
-<!--        <div class="chart-wrapper">-->
-<!--          <pie-chart />-->
-<!--        </div>-->
-<!--      </el-col>-->
-<!--      <el-col :xs="24" :sm="24" :lg="8">-->
-<!--        <div class="chart-wrapper">-->
-<!--          <bar-chart />-->
-<!--        </div>-->
-<!--      </el-col>-->
-<!--    </el-row>-->
-
-<!--    -->
-<!--  </div>-->
+  <!--    <el-row :gutter="32">-->
+  <!--      <el-col :xs="24" :sm="24" :lg="8">-->
+  <!--        <div class="chart-wrapper">-->
+  <!--          <raddar-chart/>-->
+  <!--        </div>-->
+  <!--      </el-col>-->
+  <!--      <el-col :xs="24" :sm="24" :lg="8">-->
+  <!--        <div class="chart-wrapper">-->
+  <!--          <pie-chart/>-->
+  <!--        </div>-->
+  <!--      </el-col>-->
+  <!--      <el-col :xs="24" :sm="24" :lg="8">-->
+  <!--        <div class="chart-wrapper">-->
+  <!--          <bar-chart/>-->
+  <!--        </div>-->
+  <!--      </el-col>-->
+  <!--    </el-row>-->
+  <!--  </div>-->
+  <div>
+    <h1>New Users Statistics</h1>
+    <el-row>
+      <el-col :span="4">
+        <div class="grid-content bg-purple">
+          <p>{{ userData.day0.date }}</p>
+          <p>{{ userData.day0.count }}</p>
+          <p>{{ userData.day0.rate }}%</p>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple-light">
+          <p>{{ userData.day1.date }}</p>
+          <p>{{ userData.day1.count }}</p>
+          <p>{{ userData.day1.rate }}%</p>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple">
+          <p>{{ userData.day2.date }}</p>
+          <p>{{ userData.day2.count }}</p>
+          <p>{{ userData.day2.rate }}%</p>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple-light">
+          <p>{{ userData.day3.date }}</p>
+          <p>{{ userData.day3.count }}</p>
+          <p>{{ userData.day3.rate }}%</p>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple">
+          <p>{{ userData.day4.date }}</p>
+          <p>{{ userData.day4.count }}</p>
+          <p>{{ userData.day4.rate }}%</p>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple-light">
+          <p>{{ userData.day5.date }}</p>
+          <p>{{ userData.day5.count }}</p>
+          <p>{{ userData.day5.rate }}%</p>
+        </div>
+      </el-col>
+    </el-row>
+    <h1>New Tracks Statistics</h1>
+    <el-row>
+      <el-col :span="4">
+        <div class="grid-content bg-purple">
+          <p>{{ trackData.day0.date }}</p>
+          <p>{{ trackData.day0.count }}</p>
+          <p>{{ trackData.day0.rate }}%</p>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple-light">
+          <p>{{ trackData.day1.date }}</p>
+          <p>{{ trackData.day1.count }}</p>
+          <p>{{ trackData.day1.rate }}%</p>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple">
+          <p>{{ trackData.day2.date }}</p>
+          <p>{{ trackData.day2.count }}</p>
+          <p>{{ trackData.day2.rate }}%</p>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple-light">
+          <p>{{ trackData.day3.date }}</p>
+          <p>{{ trackData.day3.count }}</p>
+          <p>{{ trackData.day3.rate }}%</p>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple">
+          <p>{{ trackData.day4.date }}</p>
+          <p>{{ trackData.day4.count }}</p>
+          <p>{{ trackData.day4.rate }}%</p>
+        </div>
+      </el-col>
+      <el-col :span="4">
+        <div class="grid-content bg-purple-light">
+          <p>{{ trackData.day5.date }}</p>
+          <p>{{ trackData.day5.count }}</p>
+          <p>{{ trackData.day5.rate }}%</p>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
-import PanelGroup from './dashboard/PanelGroup'
-import LineChart from './dashboard/LineChart'
-import RaddarChart from './dashboard/RaddarChart'
-import PieChart from './dashboard/PieChart'
-import BarChart from './dashboard/BarChart'
+import PanelGroup from '../../../../rocki-ui/src/views/dashboard/PanelGroup'
+import LineChart from '../../../../rocki-ui/src/views/dashboard/LineChart'
+import RaddarChart from '../../../../rocki-ui/src/views/dashboard/RaddarChart'
+import PieChart from '../../../../rocki-ui/src/views/dashboard/PieChart'
+import BarChart from '../../../../rocki-ui/src/views/dashboard/BarChart'
+import { listToday } from '@/api'
+import { listUserStatistics, listTrackStatistics } from '../api'
 
 const lineChartData = {
   newVisitis: {
@@ -66,10 +157,26 @@ export default {
   },
   data() {
     return {
-      lineChartData: lineChartData.newVisitis
+      lineChartData: lineChartData.newVisitis,
+      userData: 'NAN',
+      trackData: 'NAN'
     }
   },
+  created() {
+    this.getNewUserStatistics()
+    this.getNewTrackStatistics()
+  },
   methods: {
+    getNewUserStatistics() {
+      listUserStatistics().then(response => {
+        this.userData = response.data
+      })
+    },
+    getNewTrackStatistics() {
+      listTrackStatistics().then(response => {
+        this.trackData = response.data
+      })
+    },
     handleSetLineChartData(type) {
       this.lineChartData = lineChartData[type]
     }
@@ -90,9 +197,17 @@ export default {
   }
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   .chart-wrapper {
     padding: 8px;
   }
+}
+
+.bg-up {
+
+}
+
+.bg-down {
+
 }
 </style>
