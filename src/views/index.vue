@@ -119,13 +119,13 @@
 </template>
 
 <script>
-import PanelGroup from '../../../../rocki-ui/src/views/dashboard/PanelGroup'
-import LineChart from '../../../../rocki-ui/src/views/dashboard/LineChart'
-import RaddarChart from '../../../../rocki-ui/src/views/dashboard/RaddarChart'
-import PieChart from '../../../../rocki-ui/src/views/dashboard/PieChart'
-import BarChart from '../../../../rocki-ui/src/views/dashboard/BarChart'
+import PanelGroup from './dashboard/PanelGroup'
+import LineChart from './dashboard/LineChart'
+import RaddarChart from './dashboard/RaddarChart'
+import PieChart from './dashboard/PieChart'
+import BarChart from './dashboard/BarChart'
 import { listToday } from '@/api'
-import { listUserStatistics, listTrackStatistics } from '../api'
+import { listUserStatistics, listTrackStatistics } from '@/api'
 
 const lineChartData = {
   newVisitis: {
