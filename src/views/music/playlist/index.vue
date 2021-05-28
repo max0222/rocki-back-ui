@@ -283,10 +283,10 @@ export default {
       // 表单校验
       rules: {
         userId: [
-          { required: true, message: "User id cannot be null", trigger: "blur" }
+          {required: true, message: "User id cannot be null", trigger: "blur"}
         ],
         name: [
-          { required: true, message: "Playlist title cannot be null", trigger: "blur" }
+          {required: true, message: "Playlist title cannot be null", trigger: "blur"}
         ],
         // releaseDate: [
         //   { required: true, message: "创建时间不能为空", trigger: "blur" }
@@ -295,10 +295,10 @@ export default {
         //   { required: true, message: "更新时间不能为空", trigger: "blur" }
         // ],
         tracksCount: [
-          { required: true, message: "Track count cannot be null", trigger: "blur" }
+          {required: true, message: "Track count cannot be null", trigger: "blur"}
         ],
         followers: [
-          { required: true, message: "The number of followers cannot be null", trigger: "blur" }
+          {required: true, message: "The number of followers cannot be null", trigger: "blur"}
         ],
         // rocksEarned: [
         //   { required: true, message: "这首歌获利总数不能为空", trigger: "blur" }
@@ -307,7 +307,7 @@ export default {
         //   { required: true, message: "所有歌曲总时长不能为空", trigger: "blur" }
         // ],
         image: [
-          { required: true, message: "Url cannot be null", trigger: "blur" }
+          {required: true, message: "Url cannot be null", trigger: "blur"}
         ]
         // likes: [
         //   { required: true, message: "喜爱人数不能为空", trigger: "blur" }
@@ -363,7 +363,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.id)
-      this.single = selection.length!==1
+      this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 新增按钮操作 */
@@ -410,29 +410,31 @@ export default {
     handleDelete(row) {
       const ids = row.id || this.ids;
       this.$confirm('Are you sure to delete the playlist which id is "' + ids + '"?', "WARNING", {
-          confirmButtonText: "Confirm",
-          cancelButtonText: "Cancel",
-          type: "warning"
-        }).then(function() {
-          return delPlaylist(ids);
-        }).then(() => {
-          this.getList();
-          this.msgSuccess("Success");
-        }).catch(function() {});
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Cancel",
+        type: "warning"
+      }).then(function () {
+        return delPlaylist(ids);
+      }).then(() => {
+        this.getList();
+        this.msgSuccess("Success");
+      }).catch(function () {
+      });
     }
     /** 导出按钮操作 */
-  //   handleExport() {
-  //     const queryParams = this.queryParams;
-  //     this.$confirm('是否确认导出所有用户歌单数据项?', "警告", {
-  //         confirmButtonText: "确定",
-  //         cancelButtonText: "取消",
-  //         type: "warning"
-  //       }).then(function() {
-  //         return exportPlaylist(queryParams);
-  //       }).then(response => {
-  //         this.download(response.msg);
-  //       }).catch(function() {});
-  //   }
-  // }
+    //   handleExport() {
+    //     const queryParams = this.queryParams;
+    //     this.$confirm('是否确认导出所有用户歌单数据项?', "警告", {
+    //         confirmButtonText: "确定",
+    //         cancelButtonText: "取消",
+    //         type: "warning"
+    //       }).then(function() {
+    //         return exportPlaylist(queryParams);
+    //       }).then(response => {
+    //         this.download(response.msg);
+    //       }).catch(function() {});
+    //   }
+    // }
+  }
 };
 </script>
