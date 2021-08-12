@@ -2,14 +2,15 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="activity type, 1 as stake, 2as burn" prop="type">
-        <el-select v-model="queryParams.type" placeholder="请选择activity type, 1 as stake, 2as burn" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
+        <el-select v-model="queryParams.type" placeholder="activity type, 1 as stake, 2as burn" clearable size="small">
+          <el-option label="stake" value="1" />
+          <el-option label="burn" value="2" />
         </el-select>
       </el-form-item>
       <el-form-item label="pool contract address " prop="address">
         <el-input
           v-model="queryParams.address"
-          placeholder="请输入pool contract address "
+          placeholder="pool contract address "
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -18,7 +19,7 @@
       <el-form-item label="block num that contract created at" prop="block">
         <el-input
           v-model="queryParams.block"
-          placeholder="请输入block num that contract created at"
+          placeholder="block num that contract created at"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -27,23 +28,16 @@
       <el-form-item label="chain id" prop="chainId">
         <el-input
           v-model="queryParams.chainId"
-          placeholder="请输入chain id"
+          placeholder="chain id"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="create at" prop="createAt">
-        <el-date-picker clearable size="small" style="width: 200px"
-          v-model="queryParams.createAt"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择create at">
-        </el-date-picker>
-      </el-form-item>
+
       <el-form-item>
-        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">search</el-button>
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">reset</el-button>
       </el-form-item>
     </el-form>
 
@@ -55,7 +49,7 @@
           size="mini"
           @click="handleAdd"
           v-hasPermi="['user:activity:add']"
-        >新增</el-button>
+        >add</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -65,27 +59,27 @@
           :disabled="single"
           @click="handleUpdate"
           v-hasPermi="['user:activity:edit']"
-        >修改</el-button>
+        >modify</el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="danger"
-          icon="el-icon-delete"
-          size="mini"
-          :disabled="multiple"
-          @click="handleDelete"
-          v-hasPermi="['user:activity:remove']"
-        >删除</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
-          type="warning"
-          icon="el-icon-download"
-          size="mini"
-          @click="handleExport"
-          v-hasPermi="['user:activity:export']"
-        >导出</el-button>
-      </el-col>
+<!--      <el-col :span="1.5">-->
+<!--        <el-button-->
+<!--          type="danger"-->
+<!--          icon="el-icon-delete"-->
+<!--          size="mini"-->
+<!--          :disabled="multiple"-->
+<!--          @click="handleDelete"-->
+<!--          v-hasPermi="['user:activity:remove']"-->
+<!--        >删除</el-button>-->
+<!--      </el-col>-->
+<!--      <el-col :span="1.5">-->
+<!--        <el-button-->
+<!--          type="warning"-->
+<!--          icon="el-icon-download"-->
+<!--          size="mini"-->
+<!--          @click="handleExport"-->
+<!--          v-hasPermi="['user:activity:export']"-->
+<!--        >导出</el-button>-->
+<!--      </el-col>-->
 	  <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
@@ -101,7 +95,7 @@
           <span>{{ parseTime(scope.row.createAt, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="operating" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -109,18 +103,18 @@
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['user:activity:edit']"
-          >修改</el-button>
+          >modify</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['user:activity:remove']"
-          >删除</el-button>
+          >delete</el-button>
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -133,31 +127,32 @@
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="activity type, 1 as stake, 2as burn" prop="type">
-          <el-select v-model="form.type" placeholder="请选择activity type, 1 as stake, 2as burn">
-            <el-option label="请选择字典生成" value="" />
+          <el-select v-model="form.type" placeholder="activity type, 1 as stake, 2as burn">
+            <el-option label="stake" value="1" />
+            <el-option label="burn" value="2" />
           </el-select>
         </el-form-item>
         <el-form-item label="pool contract address " prop="address">
-          <el-input v-model="form.address" placeholder="请输入pool contract address " />
+          <el-input v-model="form.address" placeholder="pool contract address " />
         </el-form-item>
         <el-form-item label="block num that contract created at" prop="block">
-          <el-input v-model="form.block" placeholder="请输入block num that contract created at" />
+          <el-input v-model="form.block" placeholder="block num that contract created at" />
         </el-form-item>
         <el-form-item label="chain id" prop="chainId">
-          <el-input v-model="form.chainId" placeholder="请输入chain id" />
+          <el-input v-model="form.chainId" placeholder="chain id" />
         </el-form-item>
         <el-form-item label="create at" prop="createAt">
           <el-date-picker clearable size="small" style="width: 200px"
             v-model="form.createAt"
             type="date"
             value-format="yyyy-MM-dd"
-            placeholder="选择create at">
+            placeholder="create at">
           </el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
+        <el-button type="primary" @click="submitForm">sure</el-button>
+        <el-button @click="cancel">cancel</el-button>
       </div>
     </el-dialog>
   </div>
@@ -203,19 +198,19 @@ export default {
       // 表单校验
       rules: {
         type: [
-          { required: true, message: "activity type, 1 as stake, 2as burn不能为空", trigger: "change" }
+          { required: true, message: "activity type, 1 as stake, 2as burn cannot be null", trigger: "change" }
         ],
         address: [
-          { required: true, message: "pool contract address 不能为空", trigger: "blur" }
+          { required: true, message: "pool contract address cannot be null", trigger: "blur" }
         ],
         block: [
-          { required: true, message: "block num that contract created at不能为空", trigger: "blur" }
+          { required: true, message: "block num that contract created at cannot be null", trigger: "blur" }
         ],
         chainId: [
-          { required: true, message: "chain id不能为空", trigger: "blur" }
+          { required: true, message: "chain id cannot be null", trigger: "blur" }
         ],
         createAt: [
-          { required: true, message: "create at不能为空", trigger: "blur" }
+          { required: true, message: "create at cannot be null", trigger: "blur" }
         ]
       }
     };
@@ -270,7 +265,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加dapp-stake-activity";
+      this.title = "add dapp-stake-activity";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -279,7 +274,7 @@ export default {
       getActivity(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改dapp-stake-activity";
+        this.title = "modift dapp-stake-activity";
       });
     },
     /** 提交按钮 */
@@ -289,7 +284,7 @@ export default {
           if (this.form.id != null) {
             updateActivity(this.form).then(response => {
               if (response.code === 200) {
-                this.msgSuccess("修改成功");
+                this.msgSuccess("success");
                 this.open = false;
                 this.getList();
               }
@@ -297,7 +292,7 @@ export default {
           } else {
             addActivity(this.form).then(response => {
               if (response.code === 200) {
-                this.msgSuccess("新增成功");
+                this.msgSuccess("success");
                 this.open = false;
                 this.getList();
               }
@@ -307,32 +302,32 @@ export default {
       });
     },
     /** 删除按钮操作 */
-    handleDelete(row) {
-      const ids = row.id || this.ids;
-      this.$confirm('是否确认删除dapp-stake-activity编号为"' + ids + '"的数据项?', "警告", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        }).then(function() {
-          return delActivity(ids);
-        }).then(() => {
-          this.getList();
-          this.msgSuccess("删除成功");
-        }).catch(function() {});
-    },
-    /** 导出按钮操作 */
-    handleExport() {
-      const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有dapp-stake-activity数据项?', "警告", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        }).then(function() {
-          return exportActivity(queryParams);
-        }).then(response => {
-          this.download(response.msg);
-        }).catch(function() {});
-    }
+    // handleDelete(row) {
+    //   const ids = row.id || this.ids;
+    //   this.$confirm('是否确认删除dapp-stake-activity编号为"' + ids + '"的数据项?', "警告", {
+    //       confirmButtonText: "确定",
+    //       cancelButtonText: "取消",
+    //       type: "warning"
+    //     }).then(function() {
+    //       return delActivity(ids);
+    //     }).then(() => {
+    //       this.getList();
+    //       this.msgSuccess("删除成功");
+    //     }).catch(function() {});
+    // },
+    // /** 导出按钮操作 */
+    // handleExport() {
+    //   const queryParams = this.queryParams;
+    //   this.$confirm('是否确认导出所有dapp-stake-activity数据项?', "警告", {
+    //       confirmButtonText: "确定",
+    //       cancelButtonText: "取消",
+    //       type: "warning"
+    //     }).then(function() {
+    //       return exportActivity(queryParams);
+    //     }).then(response => {
+    //       this.download(response.msg);
+    //     }).catch(function() {});
+    // }
   }
 };
 </script>
