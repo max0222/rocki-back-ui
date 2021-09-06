@@ -288,6 +288,9 @@
           <el-radio-group v-model="form.status">
             <el-radio label="3">CERTIFIED ARTIEST</el-radio>
           </el-radio-group>
+          <el-radio-group v-model="form.status">
+            <el-radio label="4">MODIFY ALLOWED</el-radio>
+          </el-radio-group>
         </el-form-item>
         <!--        <el-form-item label="times of ceritied" prop="times">-->
         <!--          <span>{{form.times}}</span>-->
