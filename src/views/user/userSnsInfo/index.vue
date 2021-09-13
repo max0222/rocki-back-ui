@@ -48,51 +48,51 @@
       </el-form-item>
     </el-form>
 
-<!--    <el-row :gutter="10" class="mb8">-->
-<!--      <el-col :span="1.5">-->
-<!--        <el-button-->
-<!--          type="primary"-->
-<!--          icon="el-icon-plus"-->
-<!--          size="mini"-->
-<!--          @click="handleAdd"-->
-<!--          v-hasPermi="['user:userSnsInfo:add']"-->
-<!--        >新增-->
-<!--        </el-button>-->
-<!--      </el-col>-->
-<!--      <el-col :span="1.5">-->
-<!--        <el-button-->
-<!--          type="success"-->
-<!--          icon="el-icon-edit"-->
-<!--          size="mini"-->
-<!--          :disabled="single"-->
-<!--          @click="handleUpdate"-->
-<!--          v-hasPermi="['user:userSnsInfo:edit']"-->
-<!--        >修改-->
-<!--        </el-button>-->
-<!--      </el-col>-->
-<!--      <el-col :span="1.5">-->
-<!--        <el-button-->
-<!--          type="danger"-->
-<!--          icon="el-icon-delete"-->
-<!--          size="mini"-->
-<!--          :disabled="multiple"-->
-<!--          @click="handleDelete"-->
-<!--          v-hasPermi="['user:userSnsInfo:remove']"-->
-<!--        >删除-->
-<!--        </el-button>-->
-<!--      </el-col>-->
-<!--      <el-col :span="1.5">-->
-<!--        <el-button-->
-<!--          type="warning"-->
-<!--          icon="el-icon-download"-->
-<!--          size="mini"-->
-<!--          @click="handleExport"-->
-<!--          v-hasPermi="['user:userSnsInfo:export']"-->
-<!--        >导出-->
-<!--        </el-button>-->
-<!--      </el-col>-->
-<!--      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>-->
-<!--    </el-row>-->
+    <el-row :gutter="10" class="mb8">
+      <!--      <el-col :span="1.5">-->
+      <!--        <el-button-->
+      <!--          type="primary"-->
+      <!--          icon="el-icon-plus"-->
+      <!--          size="mini"-->
+      <!--          @click="handleAdd"-->
+      <!--          v-hasPermi="['user:userSnsInfo:add']"-->
+      <!--        >新增-->
+      <!--        </el-button>-->
+      <!--      </el-col>-->
+      <!--      <el-col :span="1.5">-->
+      <!--        <el-button-->
+      <!--          type="success"-->
+      <!--          icon="el-icon-edit"-->
+      <!--          size="mini"-->
+      <!--          :disabled="single"-->
+      <!--          @click="handleUpdate"-->
+      <!--          v-hasPermi="['user:userSnsInfo:edit']"-->
+      <!--        >修改-->
+      <!--        </el-button>-->
+      <!--      </el-col>-->
+      <!--      <el-col :span="1.5">-->
+      <!--        <el-button-->
+      <!--          type="danger"-->
+      <!--          icon="el-icon-delete"-->
+      <!--          size="mini"-->
+      <!--          :disabled="multiple"-->
+      <!--          @click="handleDelete"-->
+      <!--          v-hasPermi="['user:userSnsInfo:remove']"-->
+      <!--        >删除-->
+      <!--        </el-button>-->
+      <!--      </el-col>-->
+      <!--      <el-col :span="1.5">-->
+      <!--        <el-button-->
+      <!--          type="warning"-->
+      <!--          icon="el-icon-download"-->
+      <!--          size="mini"-->
+      <!--          @click="handleExport"-->
+      <!--          v-hasPermi="['user:userSnsInfo:export']"-->
+      <!--        >导出-->
+      <!--        </el-button>-->
+      <!--      </el-col>-->
+      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+    </el-row>
 
     <el-table v-loading="loading" :data="userSnsInfoList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"/>
@@ -100,6 +100,7 @@
       <el-table-column label="user id" align="center" prop="userId"/>
       <el-table-column label="auth type" align="center" prop="authtype"/>
       <el-table-column label="encrypt data" align="center" prop="encryptdata"/>
+      <el-table-column label="social link" align="center" prop="socialLink"/>
       <el-table-column label="request time" align="center" prop="requesttime"/>
       <el-table-column label="create at" align="center" prop="createAt" width="180">
         <template slot-scope="scope">
@@ -111,26 +112,26 @@
           <span>{{ parseTime(scope.row.updateAt, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-<!--      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">-->
-<!--        <template slot-scope="scope">-->
-<!--          <el-button-->
-<!--            size="mini"-->
-<!--            type="text"-->
-<!--            icon="el-icon-edit"-->
-<!--            @click="handleUpdate(scope.row)"-->
-<!--            v-hasPermi="['user:userSnsInfo:edit']"-->
-<!--          >修改-->
-<!--          </el-button>-->
-<!--          <el-button-->
-<!--            size="mini"-->
-<!--            type="text"-->
-<!--            icon="el-icon-delete"-->
-<!--            @click="handleDelete(scope.row)"-->
-<!--            v-hasPermi="['user:userSnsInfo:remove']"-->
-<!--          >删除-->
-<!--          </el-button>-->
-<!--        </template>-->
-<!--      </el-table-column>-->
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+        <template slot-scope="scope">
+          <!--          <el-button-->
+          <!--            size="mini"-->
+          <!--            type="text"-->
+          <!--            icon="el-icon-edit"-->
+          <!--            @click="handleUpdate(scope.row)"-->
+          <!--            v-hasPermi="['user:userSnsInfo:edit']"-->
+          <!--          >修改-->
+          <!--      </el-button>-->
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['user:userSnsInfo:remove']"
+          >Delete
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <pagination
@@ -209,14 +210,15 @@ export default {
         encryptdata: null,
         requesttime: null,
         createAt: null,
-        updateAt: null
+        updateAt: null,
+        socialLink: null
       },
       // 表单参数
       form: {},
       // 表单校验
       rules: {
         snsId: [
-          { required: true, message: "kyc id不能为空", trigger: "blur" }
+          {required: true, message: "kyc id不能为空", trigger: "blur"}
         ],
         userId: [
           {required: true, message: "user id不能为空", trigger: "blur"}
@@ -230,12 +232,15 @@ export default {
         requesttime: [
           {required: true, message: "request time不能为空", trigger: "blur"}
         ],
-      createAt: [
-        { required: true, message: "create at不能为空", trigger: "blur" }
-      ],
-      updateAt: [
-        { required: true, message: "update at不能为空", trigger: "blur" }
-      ]
+        createAt: [
+          {required: true, message: "create at不能为空", trigger: "blur"}
+        ],
+        updateAt: [
+          {required: true, message: "update at不能为空", trigger: "blur"}
+        ],
+        socialLink: [
+          {required: true, message: "social link不能为空", trigger: "blur"}
+        ],
       }
     };
   },
@@ -266,7 +271,8 @@ export default {
         encryptdata: null,
         requesttime: null,
         createAt: null,
-        updateAt: null
+        updateAt: null,
+        socialLink: null
       };
       this.resetForm("form");
     },

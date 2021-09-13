@@ -35,8 +35,8 @@ module.exports = {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       [process.env.VUE_APP_BASE_API]: {
         // target: `http://api.rocki.app:8080`,
-        target: `https://admin-stage.rocki.app/`,
-        // target: `http://127.0.0.1:8080`,
+        // target: `https://admin-stage.rocki.app/`,
+        target: `http://127.0.0.1:8080`,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }

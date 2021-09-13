@@ -163,8 +163,8 @@
           <span>{{ parseTime(scope.row.updateAt, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-<!--      <el-table-column label="operating" align="center" class-name="small-padding fixed-width">-->
-<!--        <template slot-scope="scope">-->
+      <el-table-column label="operating" align="center" class-name="small-padding fixed-width">
+        <template slot-scope="scope">
 <!--          <el-button-->
 <!--            size="mini"-->
 <!--            type="text"-->
@@ -172,15 +172,15 @@
 <!--            @click="handleUpdate(scope.row)"-->
 <!--            v-hasPermi="['user:userKycInfo:edit']"-->
 <!--          >modify</el-button>-->
-<!--          <el-button-->
-<!--            size="mini"-->
-<!--            type="text"-->
-<!--            icon="el-icon-delete"-->
-<!--            @click="handleDelete(scope.row)"-->
-<!--            v-hasPermi="['user:userKycInfo:remove']"-->
-<!--          >delete</el-button>-->
-<!--        </template>-->
-<!--      </el-table-column>-->
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['user:userKycInfo:remove']"
+          >delete</el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <pagination

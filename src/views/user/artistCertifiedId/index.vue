@@ -180,13 +180,14 @@
             v-hasPermi="['user:artistCertifiedId:edit']"
           >modify
           </el-button>
-          <!--          <el-button-->
-          <!--            size="mini"-->
-          <!--            type="text"-->
-          <!--            icon="el-icon-delete"-->
-          <!--            @click="handleDelete(scope.row)"-->
-          <!--            v-hasPermi="['user:artistCertifiedId:remove']"-->
-          <!--          >delete</el-button>-->
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['user:artistCertifiedId:remove']"
+          >delete
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
