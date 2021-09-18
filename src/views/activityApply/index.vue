@@ -37,6 +37,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="create at" prop="createAt">
+        <el-date-picker clearable size="small" style="width: 200px"
+          v-model="queryParams.createAt"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="选择create at">
+        </el-date-picker>
+      </el-form-item>
       <el-form-item>
         <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -92,6 +100,11 @@
       <el-table-column label="name" align="center" prop="name" />
       <el-table-column label="social media" align="center" prop="socialMedia" />
       <el-table-column label="comments" align="center" prop="comments" />
+      <el-table-column label="create at" align="center" prop="createAt" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.createAt, '{y}-{m}-{d}') }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -135,6 +148,14 @@
         <el-form-item label="comments" prop="comments">
           <el-input v-model="form.comments" placeholder="请输入comments" />
         </el-form-item>
+        <el-form-item label="create at" prop="createAt">
+          <el-date-picker clearable size="small" style="width: 200px"
+            v-model="form.createAt"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择create at">
+          </el-date-picker>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -176,7 +197,8 @@ export default {
         email: null,
         name: null,
         socialMedia: null,
-        comments: null
+        comments: null,
+        createAt: null
       },
       // 表单参数
       form: {},
@@ -193,6 +215,9 @@ export default {
         ],
         comments: [
           { required: true, message: "comments不能为空", trigger: "blur" }
+        ],
+        createAt: [
+          { required: true, message: "create at不能为空", trigger: "blur" }
         ]
       }
     };
@@ -222,7 +247,8 @@ export default {
         email: null,
         name: null,
         socialMedia: null,
-        comments: null
+        comments: null,
+        createAt: null
       };
       this.resetForm("form");
     },
