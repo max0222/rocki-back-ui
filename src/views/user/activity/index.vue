@@ -145,7 +145,7 @@
           <el-date-picker clearable size="small" style="width: 200px"
             v-model="form.createAt"
             type="date"
-            value-format="yyyy-MM-dd"
+            value-format="yyyy-MM-dd HH:mm:ss"
             placeholder="create at">
           </el-date-picker>
         </el-form-item>
