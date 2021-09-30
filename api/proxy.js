@@ -6,8 +6,8 @@ module.exports = (req, res) => {
   // 代理目标地址
   // 这里使用 backend 主要用于区分 vercel serverless 的 api 路径
   if (req.url.startsWith('/dev-api')) {
-    // target = 'http://api.rocki.app:8080'  // 正式环境
-    target = 'https://admin-stage.rocki.app/'
+    target = 'http://api.rocki.app:8080'  // 正式环境
+    // target = 'https://admin-stage.rocki.app/'
   }
 
   // 创建代理对象并转发请求
