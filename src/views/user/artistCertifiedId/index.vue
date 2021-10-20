@@ -221,7 +221,7 @@
           <span>{{ kycForm.ownerDid }}</span>
         </el-form-item>
         <el-form-item label="encrypt Origin Data" prop="encryptData">
-          <span>{{ kycForm.encryptData }}</span>
+          <div :style="{maxHeight: '200px', overflow: 'auto'}">{{ kycForm.encryptData }}</div>
         </el-form-item>
         <el-form-item label="request time stamp" prop="requesttime">
           <span>{{ kycForm.requesttime }}</span>
@@ -245,7 +245,10 @@
           <span>{{ snsForm.authtype }}</span>
         </el-form-item>
         <el-form-item label="encrypt data" prop="encryptdata">
-          <span>{{ snsForm.encryptdata }}</span>
+          <div :style="{maxHeight: '200px', overflow: 'auto'}">{{ snsForm.encryptdata }}</div>
+        </el-form-item>
+        <el-form-item label="social Link" prop="encryptdata">
+          <a :href="decodeAddress(snsForm.encryptdata)" target="_blank">{{decodeAddress(snsForm.encryptdata)}}</a>
         </el-form-item>
         <el-form-item label="request time" prop="requesttime">
           <span>{{ snsForm.requesttime }}</span>
@@ -322,6 +325,7 @@ import {
 } from "@/api/user/artistCertifiedId";
 import {getUserKycInfo} from "../../../api/user/userKycInfo";
 import {getUserSnsInfo} from "../../../api/user/userSnsInfo";
+import {queryAddress} from '@/utils/jsencrypt';
 
 export default {
   name: "ArtistCertifiedId",
@@ -432,6 +436,10 @@ export default {
         this.loading = false;
       });
     },
+    // 解码社交链接
+    decodeAddress(data) {
+      return data? queryAddress(data):'';
+      },
     // 取消按钮
     cancel() {
       this.open = false;

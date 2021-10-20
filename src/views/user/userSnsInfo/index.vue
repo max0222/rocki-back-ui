@@ -99,8 +99,16 @@
       <el-table-column label="sns id" align="center" prop="snsId"/>
       <el-table-column label="user id" align="center" prop="userId"/>
       <el-table-column label="auth type" align="center" prop="authtype"/>
-      <el-table-column label="encrypt data" align="center" prop="encryptdata"/>
-      <el-table-column label="social link" align="center" prop="socialLink"/>
+      <el-table-column label="encrypt data" align="center" prop="encryptdata">
+        <template slot-scope="scope">
+          <div class="limit-cry">{{scope.row.encryptdata}}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="social link" align="center" prop="socialLink">
+        <template slot-scope="scope">
+          <a :href="decodeAddress(scope.row.encryptdata)" target="_blank">{{decodeAddress(scope.row.encryptdata)}}</a>
+        </template>
+      </el-table-column>
       <el-table-column label="request time" align="center" prop="requesttime"/>
       <el-table-column label="create at" align="center" prop="createAt" width="180">
         <template slot-scope="scope">
@@ -177,6 +185,7 @@ import {
   updateUserSnsInfo,
   exportUserSnsInfo
 } from "@/api/user/userSnsInfo";
+import {queryAddress} from '@/utils/jsencrypt';
 
 export default {
   name: "UserSnsInfo",
@@ -257,6 +266,11 @@ export default {
         this.loading = false;
       });
     },
+    // 解码社交链接
+    decodeAddress(data) {
+      const addr = queryAddress(data);
+      return addr
+      },
     // 取消按钮
     cancel() {
       this.open = false;
@@ -364,3 +378,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .limit-cry{
+    max-height: 100px;
+    overflow: auto;
+    }
+</style>

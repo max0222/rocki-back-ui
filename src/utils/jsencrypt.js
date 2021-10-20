@@ -1,4 +1,5 @@
 import JSEncrypt from 'jsencrypt/bin/jsencrypt'
+const VC = require('@ont-dev/ont-tag');
 
 // 密钥对生成 http://web.chacuo.net/netrsakeypair
 
@@ -28,3 +29,9 @@ export function decrypt(txt) {
   return encryptor.decrypt(txt) // 对数据进行解密
 }
 
+// 解析社交SNS链接
+export const queryAddress = (data) => {
+  const result = VC.utils.deserialize(data);
+  const address = result.credentialSubject.HomePage;
+  return address;
+}
