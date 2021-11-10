@@ -351,6 +351,7 @@ export default {
       open: false,
       kycInfo: false,
       snsInfo: false,
+      initModifyStatus: '',
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -487,16 +488,20 @@ export default {
       this.reset();
       const id = row.id || this.ids
       getArtistCertifiedId(id).then(response => {
+        response.data.status = String(response.data.status)
         this.form = response.data;
         this.open = true;
         this.title = "Modify USER-VERIFICATION";
+        this.initModifyStatus = response.data?.status;
       });
     },
     /** 提交按钮 */
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.id != null) {
+          if(this.form.status === this.initModifyStatus) {
+            this.msgError("状态一样, 不能修改成功，请检查！");
+          } else if (this.form.id != null) {
             updateArtistCertifiedId(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess("修改成功");
