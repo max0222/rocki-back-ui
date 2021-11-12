@@ -38,7 +38,7 @@ export function updateArtistCertifiedId(data) {
 // 删除【请填写功能名称】
 export function delArtistCertifiedId(id) {
   return request({
-    url: '/user/artistCertifiedId/' + id,
+    url: '/user/artistCertifiedId/remove' + id,
     method: 'delete'
   })
 }
